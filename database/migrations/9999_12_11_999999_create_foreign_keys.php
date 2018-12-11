@@ -13,6 +13,13 @@ class CreateForeignKeys extends Migration
      */
     public function up()
     {
+        Schema::table('examinations', function (Blueprint $table) {
+            $table->foreign('manager_id')
+                ->references('id')->on('user')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+        });
+
         Schema::table('examination_user', function (Blueprint $table) {
             $table->foreign('examination_id')
                 ->references('id')->on('examinations')

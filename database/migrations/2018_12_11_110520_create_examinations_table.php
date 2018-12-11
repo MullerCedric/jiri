@@ -16,6 +16,7 @@ class CreateExaminationsTable extends Migration
         Schema::create('examinations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->unsignedInteger('manager_id');
             $table->datetime('start_time')->nullable();
             $table->boolean('is_draft')->default(true);
             $table->boolean('is_happening')->default(false);

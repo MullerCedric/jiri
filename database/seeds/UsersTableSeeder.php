@@ -19,6 +19,6 @@ class UsersTableSeeder extends Seeder
             'is_admin' => true,
             'is_active' => true,
         ]);
-        factory(jiri\User::class, 4)->create();
+        factory(jiri\User::class, 5)->create();
     }
 }
