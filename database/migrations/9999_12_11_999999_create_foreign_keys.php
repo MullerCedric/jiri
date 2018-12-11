@@ -38,6 +38,31 @@ class CreateForeignKeys extends Migration
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
         });
+
+        Schema::table('marks', function (Blueprint $table) {
+            $table->foreign('examination_id')
+                ->references('id')->on('examinations')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+        });
+        Schema::table('marks', function (Blueprint $table) {
+            $table->foreign('examiner_id')
+                ->references('id')->on('users')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+        });
+        Schema::table('marks', function (Blueprint $table) {
+            $table->foreign('student_id')
+                ->references('id')->on('users')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+        });
+        Schema::table('marks', function (Blueprint $table) {
+            $table->foreign('project_id')
+                ->references('id')->on('projects')
+                ->onDelete('RESTRICT')
+                ->onUpdate('CASCADE');
+        });
     }
 
     /**
