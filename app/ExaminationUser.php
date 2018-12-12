@@ -11,6 +11,7 @@ class ExaminationUser extends Model
      *
      * @var array
      */
+    protected $table = 'examination_user';
     protected $fillable = [
         'examination_id', 'user_id', 'role',
     ];

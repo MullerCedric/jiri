@@ -14,4 +14,8 @@ class Examination extends Model
     protected $fillable = [
         'name', 'start_time', 'is_draft', 'is_happening',
     ];
+
+    public function users() {
+        return $this->belongsToMany(User::class);
+    }
 }
