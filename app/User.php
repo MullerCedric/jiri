@@ -28,7 +28,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function examinations() {
+    public function allExaminations() {
         return $this->belongsToMany(Examination::class);
+    }
+    public function isManaging() {
+        return $this->hasMany(Examination::class, 'manager_id');
+    }
+    public function weightings() {
+        return $this->hasMany(Weighting::class, 'apply_for_user');
+    }
+    public function receivedMarks() {
+        return $this->hasMany(Mark::class, 'student_id');
+    }
+    public function givenMarks() {
+        return $this->hasMany(Mark::class, 'examiner_id');
     }
 }
