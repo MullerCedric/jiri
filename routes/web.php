@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    view('dashboard');
+})->middleware('auth');
+
+//Examination
+Route::get('/allMyExaminations', function () {
+    return \jiri\User::find(auth()->id())->isManaging()->get();
+})->middleware('auth');
