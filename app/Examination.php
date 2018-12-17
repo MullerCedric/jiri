@@ -12,7 +12,7 @@ class Examination extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'start_time', 'is_draft', 'is_happening',
+        'name', 'starting_at', 'is_draft', 'is_happening',
     ];
 
     public function manager() {
@@ -34,5 +34,18 @@ class Examination extends Model
     }
     public function projects() {
         return $this->hasMany(Project::class);
+    }
+
+    public function scopeHasHappened($query)
+    {
+        return $query->where('is_happening', '=', false)->whereDate('starting_at', '<', date('Y-m-d H:i:s'));
+    }
+    public function scopeHasNotYetHappened($query)
+    {
+        return $query->where('is_happening', '=', false)->whereDate('starting_at', '>', date('Y-m-d H:i:s'));
+    }
+    public function scopeIsHappening($query)
+    {
+        return $query->where('is_happening', '=', true);
     }
 }

@@ -34,6 +34,15 @@ class User extends Authenticatable
     public function isManaging() {
         return $this->hasMany(Examination::class, 'manager_id');
     }
+    public function comingManagedExaminations() {
+        return $this->hasMany(Examination::class, 'manager_id')->hasNotYetHappened();
+    }
+    public function currentManagedExaminations() {
+        return $this->hasMany(Examination::class, 'manager_id')->isHappening();
+    }
+    public function finishedManagedExaminations() {
+        return $this->hasMany(Examination::class, 'manager_id')->hasHappened();
+    }
     public function weightings() {
         return $this->hasMany(Weighting::class, 'apply_for_user');
     }
@@ -42,5 +51,10 @@ class User extends Authenticatable
     }
     public function givenMarks() {
         return $this->hasMany(Mark::class, 'examiner_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', '=', true);
     }
 }
