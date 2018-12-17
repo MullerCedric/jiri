@@ -17,7 +17,7 @@ class CreateExaminationsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedInteger('manager_id');
-            $table->datetime('start_time')->nullable();
+            $table->datetime('starting_at')->nullable();
             $table->boolean('is_draft')->default(true);
             $table->boolean('is_happening')->default(false);
             $table->timestamps();

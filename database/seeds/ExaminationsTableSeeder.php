@@ -14,7 +14,7 @@ class ExaminationsTableSeeder extends Seeder
         \jiri\Examination::create([
             'name' => 'Jury janvier 2019',
             'manager_id' => 1,
-            'start_time' => '2019-01-24 08:35:00',
+            'starting_at' => '2019-01-24 08:35:00',
             'is_draft' => 0,
         ]);
         factory(jiri\Examination::class, 4)->create();

@@ -21,7 +21,7 @@ class CreateMarksTable extends Migration
             $table->unsignedInteger('project_id')->nullable();
             $table->unsignedDecimal('mark');
             $table->string('type')->default('specific');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
