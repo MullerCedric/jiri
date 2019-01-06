@@ -18,15 +18,15 @@ Route::get('/', function () {
 })->middleware('auth');
 
 //Examination
-Route::get('/allMyExaminations', function () {
+Route::get('/all-my-examinations', function () {
     return \jiri\User::find(auth()->id())->isManaging()->get();
 })->middleware('auth');
-Route::get('/myFutureExaminations', function () {
+Route::get('/my-future-examinations', function () {
     return \jiri\User::find(auth()->id())->comingManagedExaminations()->get();
 })->middleware('auth');
-Route::get('/myCurrentExaminations', function () {
+Route::get('/my-current-examinations', function () {
     return \jiri\User::find(auth()->id())->currentManagedExaminations()->get();
 })->middleware('auth');
-Route::get('/myPastExaminations', function () {
+Route::get('/my-past-examinations', function () {
     return \jiri\User::find(auth()->id())->finishedManagedExaminations()->get();
 })->middleware('auth');
