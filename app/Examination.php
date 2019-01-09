@@ -38,11 +38,15 @@ class Examination extends Model
 
     public function scopeHasHappened($query)
     {
-        return $query->where('is_happening', '=', false)->whereDate('starting_at', '<', date('Y-m-d H:i:s'));
+        return $query->where('is_happening', '=', false)
+            ->whereDate('starting_at', '<', date('Y-m-d H:i:s'))
+            ->orderBy('starting_at', 'DESC');
     }
     public function scopeHasNotYetHappened($query)
     {
-        return $query->where('is_happening', '=', false)->whereDate('starting_at', '>', date('Y-m-d H:i:s'));
+        return $query->where('is_happening', '=', false)
+            ->whereDate('starting_at', '>', date('Y-m-d H:i:s'))
+            ->orderBy('starting_at', 'ASC');
     }
     public function scopeIsHappening($query)
     {

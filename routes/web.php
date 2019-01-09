@@ -30,3 +30,12 @@ Route::get('/my-current-examinations', function () {
 Route::get('/my-past-examinations', function () {
     return \jiri\User::find(auth()->id())->finishedManagedExaminations()->get();
 })->middleware('auth');
+Route::get('/marks/currentManagedExaminations', function () {
+    return \jiri\Mark::with([
+        'examination:id,name',
+        'project:id,name',
+        'givenTo:id,name',
+        'givenBy:id,name'])
+        ->fromAnExaminationManagedByCurrentUser()
+        ->get();
+})->middleware('auth');
