@@ -27,7 +27,7 @@
 <script>
     import {mapState} from 'vuex';
 
-    import UserMarks from './UserMarks.vue';
+    import UserMarks from '../users/UserMarks.vue';
 
     export default {
         name: "ExaminationNow",

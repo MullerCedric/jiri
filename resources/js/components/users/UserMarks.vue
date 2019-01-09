@@ -13,7 +13,7 @@
             <p>Pire projet : {{ worstProject.project ? worstProject.project.name : 'Projet inconnu' }} ({{ worstProject.mark }}/20)</p>
         </div>
         <div>
-            <button type="button" class="btn btn-outline-secondary" @click="toggleExpansion">Voir moins de détails</button>
+            <button type="button" class="btn btn-outline-secondary" @click="toggleExpansion">{{ showDetailsTxt }}</button>
         </div>
     </div>
 </template>
@@ -57,6 +57,9 @@
             },
             worstProject() {
                 return _.minBy(this.marksWithInfos, 'mark');
+            },
+            showDetailsTxt() {
+                return this.isExpanded ? '- Voir moins de détails' : '+ Voir plus de détails';
             },
         },
         methods: {
