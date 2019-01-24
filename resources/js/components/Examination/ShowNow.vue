@@ -10,14 +10,16 @@
                 <p class="lead">Le jury <i>{{ examination.name }}</i> a commencé. Voici les avancées en temps réel</p>
 
                 <div v-for="(exam, exam_id) in formattedMarks" v-if="parseInt(exam_id, 10) === examination.id">
-                    <UserMarks v-for="(student, studentKey) in exam"
-                               :key="studentKey"
-                               :student="student">
-                    </UserMarks>
+                    <user-marks-dashboard v-for="(student, studentKey) in exam"
+                                          :key="studentKey"
+                                          :student="student">
+                    </user-marks-dashboard>
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-primary btn-lg m-auto d-block">Mettre fin à ce jury</button>
+                    <button type="button" class="btn btn-primary btn-lg m-auto d-block">
+                        Mettre fin à ce jury
+                    </button>
                 </div>
             </div>
         </div>
@@ -26,31 +28,34 @@
 
 <script>
     import {mapState} from 'vuex';
+    import * as types from '../../store/types';
 
-    import UserMarks from '../users/UserMarks.vue';
+    import UserMarksDashboard from '../User/MarksDashboard.vue';
 
     export default {
-        name: "ExaminationNow",
+        name: 'ShowNow',
         components: {
-            UserMarks,
+            UserMarksDashboard,
         },
         props: ['examinations'],
         computed: {
             formattedMarks() {
-                return this.formatMarks(this.marksForCurrentManagedExaminations);
+                return this.formatMarks(this.marksForCurrentlyManagedExaminations);
             },
-            ...mapState(['marksForCurrentManagedExaminations']),
+            ...mapState({
+                marksForCurrentlyManagedExaminations: state => state.markStore.marksForCurrentlyManagedExaminations,
+            }),
         },
         mounted() {
-            this.$store.dispatch('fetchMarksForCurrentManagedExaminations');
+            this.$store.dispatch(types.FETCH_MARKS_FOR_CURRENTLY_MANAGED_EXAMINATIONS);
         },
         methods: {
             formatMarks(src) {
                 let formatted = {};
                 for (let prop in src) {
                     if (src.hasOwnProperty(prop)) {
-                        formatted[src[prop].examination_id] = formatted[src[prop].examination_id] || {} ;
-                        formatted[src[prop].examination_id][src[prop].given_to.id] = formatted[src[prop].examination_id][src[prop].given_to.id] || [] ;
+                        formatted[src[prop].examination_id] = formatted[src[prop].examination_id] || {};
+                        formatted[src[prop].examination_id][src[prop].given_to.id] = formatted[src[prop].examination_id][src[prop].given_to.id] || [];
 
                         formatted[src[prop].examination_id][src[prop].given_to.id].push(src[prop]);
                     }

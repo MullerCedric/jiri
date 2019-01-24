@@ -12,7 +12,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'examination_id', 'apply_for_user', 'weighting',
+        'name', 'examination_id',
     ];
 
     public function examination() {

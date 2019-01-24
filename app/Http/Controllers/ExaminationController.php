@@ -4,6 +4,7 @@ namespace jiri\Http\Controllers;
 
 use jiri\Examination;
 use Illuminate\Http\Request;
+use jiri\Http\Requests\StoreExamination;
 
 class ExaminationController extends Controller
 {
@@ -33,9 +34,9 @@ class ExaminationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreExamination $request)
     {
-        //
+        return Examination::create($request->validated() + ['manager_id' => auth()->id()]);
     }
 
     /**

@@ -26,7 +26,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import App from './components/Dashboard.vue'
+import App from './App.vue'
 
 import router from './router';
 import store from './store/store';

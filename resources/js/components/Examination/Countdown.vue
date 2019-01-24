@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "Countdown",
+        name: 'Countdown',
         filters: {
             two_digits: function (value) {
                 if (value < 0) {

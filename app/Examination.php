@@ -12,7 +12,7 @@ class Examination extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'starting_at', 'is_draft', 'is_happening',
+        'name', 'manager_id', 'starting_at', 'is_draft', 'is_happening',
     ];
 
     public function manager() {

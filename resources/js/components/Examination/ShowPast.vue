@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: "ExaminationPast",
+        name: 'ShowPast',
         props: ['examinations'],
     }
 </script>

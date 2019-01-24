@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div>{{ name }}</div><div class="float-right text-right">{{ passages }}</div>
-        <div v-if="isExpanded">
+        <div>{{ name }}</div>
+        <div class="float-right text-right">{{ passages }}</div>
+        <base-accordion>
             <p>
                 A vu :
                 <span v-for="(examiner, index) of examinersSeen">
@@ -9,24 +10,25 @@
                 </span>
             </p>
             <p>Note moyenne actuelle : {{ avgMark }}/20</p>
-            <p>Meilleur projet : {{ bestProject.project ? bestProject.project.name : 'Projet inconnu' }} ({{ bestProject.mark }}/20)</p>
-            <p>Pire projet : {{ worstProject.project ? worstProject.project.name : 'Projet inconnu' }} ({{ worstProject.mark }}/20)</p>
-        </div>
-        <div>
-            <button type="button" class="btn btn-outline-secondary" @click="toggleExpansion">{{ showDetailsTxt }}</button>
-        </div>
+            <p>
+                Meilleur projet : {{ bestProject.project ? bestProject.project.name : 'Projet inconnu' }}
+                ({{ bestProject.mark }}/20)
+            </p>
+            <p>
+                Pire projet : {{ worstProject.project ? worstProject.project.name : 'Projet inconnu' }}
+                ({{ worstProject.mark }}/20)
+            </p>
+        </base-accordion>
     </div>
 </template>
 
 <script>
+    import BaseAccordion from "../shared/BaseAccordion.vue";
+
     export default {
-        name: "UserMarks",
+        name: 'UserMarks',
+        components: {BaseAccordion},
         props: ['student'],
-        data() {
-            return {
-                isExpanded: false,
-            };
-        },
         computed: {
             name() {
                 return this.student[0].given_to.name;
@@ -37,14 +39,14 @@
             },
             marksWithInfos() {
                 let marksWithInfos = [];
-                for (let i = 0, len = this.student.length; i < len; i++){
+                for (let i = 0, len = this.student.length; i < len; i++) {
                     marksWithInfos.push(this.student[i]);
                 }
                 return marksWithInfos;
             },
             examinersSeen() {
                 let distinctMarks = _.uniqBy(this.marksWithInfos, 'given_by.id'), examiners = [];
-                for (let i = 0, len = distinctMarks.length; i < len; i++){
+                for (let i = 0, len = distinctMarks.length; i < len; i++) {
                     examiners.push(distinctMarks[i].given_by);
                 }
                 return examiners;
@@ -58,14 +60,6 @@
             worstProject() {
                 return _.minBy(this.marksWithInfos, 'mark');
             },
-            showDetailsTxt() {
-                return this.isExpanded ? '- Voir moins de détails' : '+ Voir plus de détails';
-            },
-        },
-        methods: {
-            toggleExpansion() {
-                this.isExpanded = !this.isExpanded;
-            }
         },
     }
 </script>

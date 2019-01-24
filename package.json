@@ -14,14 +14,16 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^2.1.14",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
-        "vue": "^2.5.17"
+        "vue": "^2.5.21"
     },
     "dependencies": {
+        "datalist-polyfill": "^1.23.2",
         "npm": "^6.5.0",
         "vue-router": "^3.0.2",
+        "vuejs-datepicker": "^1.5.4",
         "vuex": "^3.0.1"
     }
 }
